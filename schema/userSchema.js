@@ -1,6 +1,8 @@
 let mongoose = require("mongoose")
 let bcrypt = require("bcrypt")
 let jwt = require("jsonwebtoken")
+const orderItemSchema = require("./orderSchema")
+
 let userSchema = new mongoose.Schema({
     email:{
         type: String,
@@ -18,12 +20,6 @@ let userSchema = new mongoose.Schema({
         required: [true , 'Password is required'],
         minLength: [8 , "Password min length should be atleast 8 characters"],
         maxLength: [18, "Password max length is 18 characters"],
-        /*validate:{
-            validator: (value)=>{
-                return strongPassword.test(value)
-            },
-            message: "Password should have atleast 1 lowercase alphabetical character ,  1 uppercase alphabetical character , 1 numeric character"
-        }*/
     },
     firstName : {
         type: String,
@@ -76,10 +72,13 @@ let userSchema = new mongoose.Schema({
     zip:{
         type: String,
         required: [true , "zip is required"]
-    },
-    activeOrders: {
-        type: Array
-    }
+    }/*,
+    activeOrders: [
+        {
+            items:[orderItemSchema],
+            bill: Number
+        }
+    ] */
 
 
 

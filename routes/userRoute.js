@@ -1,10 +1,11 @@
 const express = require("express")
 let router = express.Router()
 const {getAllUsers , createUser, getUser, loginUser, logoutUser} = require("../controllers/userController")
+const { isAuthenticated } = require("../middleware/auth")
 
 
 //GET ALL Users
-router.route("/users").get(getAllUsers)
+router.route("/users").get( getAllUsers)
 
 //GET SPECIFIC USER
 router.route("/users/userID/:id").get(getUser)

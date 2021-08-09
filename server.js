@@ -5,10 +5,15 @@ let app = express()
 let connectDb = require("./config/connectDB")
 connectDb()
 
-
+//COOKIE PARSER
+let cookieParser = require("cookie-parser")
+app.use(cookieParser())
 //USE CORS
 let cors = require("cors")
-app.use(cors())
+app.use(cors({
+    origin:['http://localhost:3001' , 'http://localhost:3000'],
+    credentials: true
+}))
 
 //JSON MIDDLEWARE
 app.use(express.json())
@@ -24,3 +29,7 @@ app.use("/kfc" , productRoute)
 //USER ROUTE
 let userRoute = require("./routes/userRoute")
 app.use("/kfc" , userRoute )
+
+//ORDER ROUTE
+let orderRoute = require("./routes/orderRoute")
+app.use("/kfc", orderRoute)

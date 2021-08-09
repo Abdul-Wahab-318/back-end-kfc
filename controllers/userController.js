@@ -82,7 +82,8 @@ exports.loginUser =  async (req,res)=>{
         })
     }catch(e){
         res.status(400).json({
-            error : e
+            error : e,
+            message: "cannot login"
         })
     }
     
