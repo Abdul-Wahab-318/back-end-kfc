@@ -24,6 +24,15 @@ let orderSchema = new mongoose.Schema(
         bill: {
             type : Number,
             required: [true, "Bill is missing"]
+        },
+        user:{
+            _id: mongoose.Types.ObjectId,
+            email : String,
+            name: String
+        },
+        status: {
+            type : String,
+            default: "processing"
         }
     }
 )

@@ -16,7 +16,6 @@ exports.placeOrder = async (req,res)=>{
     }
 }
 
-
 //GET ALL ORDERS
 exports.getAllOrders = async (req,res)=>{
     try{
@@ -34,6 +33,76 @@ exports.getAllOrders = async (req,res)=>{
     }
 }
 
+//GET ONE ORDER
+exports.getOneOrder = async (req,res)=>{
+    try
+    {
+        let order = await orderSchema.findById({_id: req.params.id})
+
+        if(!order)
+        res.status(400).json({
+            message : "Resource not found"
+        })
+
+        res.status(200).json({
+            order
+        })
+    }
+    catch(e)
+    {
+        res.status(400).json({
+            message: "Error occured",
+            error : e
+        })
+    }
+}
+
+//GET ACTVE ORDERS OF A USER
+exports.getActiveOrders = async (req,res)=>{
+    try{
+        let orders = await orderSchema.find({"user._id": req.params.id})
+
+        /*if(orders.length==0)
+        {
+            res.status(400).json({
+                message: "No active orders found"
+            })
+        }*/
+
+        res.status(200).json({
+            message: "Orders retrieved",
+            orders
+        })
+    }
+    catch(e)
+    {
+        res.status(400).json({
+            message: "Error occured",
+            error : e
+        })
+    }
+}
+
+//UPDATE ORDER STATUS TO DISPATCH
+exports.updateToDispatch = async (req,res)=>{
+    try{
+        let order = await orderSchema.findByIdAndUpdate(req.params.id , {...req.body , status: "dispatched"})
+
+        if(!order)
+        res.status(400).json({message: "order not found"})
+
+        res.status(200).json({
+            message: "order status updated"
+        })
+    }
+    catch(e)
+    {
+        res.status(400).json({
+            message: "error occured",
+            error : e
+        })
+    }
+}
 
 //DELETE AN ORDER (COMPLETE ORDER)
 exports.deleteOrder = async (req,res) =>{
@@ -42,11 +111,11 @@ exports.deleteOrder = async (req,res) =>{
         if(!order)
         res.status(400).json({message: "order not found"})
     
-        res.status(200).json({message: "order completed"})
+        res.status(200).json({message: "order has been cancelled . Sorry : ) "})
     }
     catch(e){
         res.status(400).json({
-            message: "mission failed",
+            message: "mission ",
             error : e
         })
     }
