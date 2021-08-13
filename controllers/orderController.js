@@ -9,6 +9,7 @@ exports.placeOrder = async (req,res)=>{
             dumbCookie : req.cookies
         })
     }catch(e){
+        console.log(e)
         res.status(400).json({
             message: "nope",
             error: e.errors
@@ -62,12 +63,13 @@ exports.getActiveOrders = async (req,res)=>{
     try{
         let orders = await orderSchema.find({"user._id": req.params.id})
 
-        /*if(orders.length==0)
+        if(orders.length==0)
         {
-            res.status(400).json({
+            res.status(200).json({
                 message: "No active orders found"
             })
-        }*/
+            return
+        }
 
         res.status(200).json({
             message: "Orders retrieved",
@@ -109,7 +111,10 @@ exports.deleteOrder = async (req,res) =>{
     try{
         let order = await orderSchema.findByIdAndDelete(req.params.id)
         if(!order)
-        res.status(400).json({message: "order not found"})
+        {
+            res.status(400).json({message: "order not found"})
+            return
+        }
     
         res.status(200).json({message: "order has been cancelled . Sorry : ) "})
     }

@@ -30,6 +30,16 @@ let orderSchema = new mongoose.Schema(
             email : String,
             name: String
         },
+        location:{
+            city: {
+                type: String,
+                required : true
+            },
+            area: {
+                type: String,
+                required: true
+            }
+        },
         status: {
             type : String,
             default: "processing"

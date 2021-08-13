@@ -89,8 +89,11 @@ exports.loginUser =  async (req,res)=>{
     
 }
 
+
+//LOGOUT USER
 exports.logoutUser = async (req,res)=>{
     res.clearCookie("token")
+    req.user = null
     res.status(200).json({
         message: "logged out"
     })
