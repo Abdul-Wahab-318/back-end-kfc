@@ -33,3 +33,7 @@ app.use("/kfc" , userRoute )
 //ORDER ROUTE
 let orderRoute = require("./routes/orderRoute")
 app.use("/kfc", orderRoute)
+
+//ADMIN ROUTE
+let adminRoute = require("./routes/adminRoute")
+app.use('/kfc',adminRoute)

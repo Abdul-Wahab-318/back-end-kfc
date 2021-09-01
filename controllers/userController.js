@@ -59,6 +59,7 @@ exports.loginUser =  async (req,res)=>{
             res.status(400).json({
                 message: "Enter email and password"
             })
+  
         }
 
         let user = await userSchema.findOne({email})
