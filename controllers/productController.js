@@ -3,6 +3,10 @@ const mongoose = require("mongoose")
 
 //GET ALL PRODUCTS
 exports.getAllProducts = async (req,resp)=>{
+    if(1)
+    resp.status(200).json({
+        message: "request entertained"
+    })
     let allProducts = await productSchema.find()
     resp.status(200).json({
         message:"success",
