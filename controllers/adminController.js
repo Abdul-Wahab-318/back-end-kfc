@@ -13,10 +13,10 @@ exports.registerAdmin = async (req,res)=>{
         let admin = await adminSchema.create(req.body)
         res.admin = admin
         let token = admin.getJwtToken()
-        console.log(token)
+
         res.status(200).cookie('token',token , {httpOnly:true}).json({
             message: "admin created",
-            admin
+            admin : {...admin , password : null}
         })
 
     }   
@@ -38,21 +38,21 @@ exports.loginAdmin = async (req,res)=>{
             })
         }
         let admin = await adminSchema.findOne({email})
-        console.log(admin)
+
         let isMatched = await admin.comparePassword(password)
-        console.log(isMatched , "!!!!!!!!!")
+
         if(!isMatched)
         {
             res.status(400).json({
                 message: "email or password is incorrect"
             })
         }
-        req.admin = admin
+        req.admin = {...admin}
+        admin.password = ""
         let token = admin.getJwtToken()
         res.status(200).cookie('token',token,{httpOnly:true}).json({
             message: 'logged in',
-            admin,
-            token
+            admin 
         })
     }
     catch(error)

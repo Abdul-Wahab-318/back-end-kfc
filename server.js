@@ -5,15 +5,28 @@ let app = express()
 let connectDb = require("./config/connectDB")
 connectDb()
 
+//CLOUDINARY CONFIG 
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({ 
+    cloud_name: 'djyta4tsr', 
+    api_key: '579297719626592', 
+    api_secret: 'vLrR33rs7xssXDX_syf8EA6Xrvk' 
+  });
+
 //COOKIE PARSER
 let cookieParser = require("cookie-parser")
 app.use(cookieParser())
+
 //USE CORS
 let cors = require("cors")
 app.use(cors({
     origin:['http://localhost:3001' , 'http://localhost:3000' , "https://kfc-awm.netlify.app"],
     credentials: true
 }))
+
+var bodyParser = require('body-parser')
+app.use(bodyParser({limit : '20mb'}))
 
 //JSON MIDDLEWARE
 app.use(express.json())

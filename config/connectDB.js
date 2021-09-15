@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const connectDB = async ()=>{
-    await mongoose.connect("mongodb+srv://wahabmaliq:steel321@cluster0.kwevt.mongodb.net/kfc", {
+    await mongoose.connect("mongodb://localhost/kfc", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,

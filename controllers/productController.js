@@ -1,5 +1,6 @@
 const productSchema = require('../schema/productSchema') 
 const mongoose = require("mongoose")
+const cloudinary = require('cloudinary').v2
 
 //GET ALL PRODUCTS
 exports.getAllProducts = async (req,resp)=>{
@@ -38,8 +39,10 @@ exports.deleteProduct = async (req,res)=>{
 // CREATE A PRODUCT
 exports.createProduct = async (req,res)=>{
     try{
-        let product = await productSchema.create(req.body)
-    
+        const imageURL = await cloudinary.uploader.upload(req.body.image , {folder : 'kfc'})
+
+        let product = await productSchema.create({...req.body , image: imageURL.secure_url})
+        
         res.status(201).json({
             "message": `Product ${product}`
         })

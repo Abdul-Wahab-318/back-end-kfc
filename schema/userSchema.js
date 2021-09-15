@@ -6,6 +6,7 @@ const orderItemSchema = require("./orderSchema")
 let userSchema = new mongoose.Schema({
     email:{
         type: String,
+        unique: true,
         required: [true , "Email is Required"],
         validate:{
             validator: (value)=>{
