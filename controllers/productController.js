@@ -4,11 +4,10 @@ const cloudinary = require('cloudinary').v2
 
 //GET ALL PRODUCTS
 exports.getAllProducts = async (req,resp)=>{
-    //let allProducts = await productSchema.find()
+    let allProducts = await productSchema.find()
     resp.status(200).json({
         message:"success",
-        products : {title : "epic"}
-       // allProducts
+       allProducts
     })
 }
 

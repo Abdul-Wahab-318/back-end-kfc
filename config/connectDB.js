@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
+const URI = "mongodb+srv://wahabmaliq:steel321@cluster0.kwevt.mongodb.net/kfc?retryWrites=true&w=majority"
 
 const connectDB = async ()=>{
-    await mongoose.connect("mongodb://localhost/kfc", {
+    await mongoose.connect(URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
