@@ -32,7 +32,7 @@ app.use(bodyParser({limit : '20mb'}))
 app.use(express.json())
 
 //LISTEN AT PORT
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 app.listen(PORT , console.log(`server running on ${PORT}`))
 
 //PRODUCT MIDDLEWARE
@@ -50,3 +50,6 @@ app.use("/kfc", orderRoute)
 //ADMIN ROUTE
 let adminRoute = require("./routes/adminRoute")
 app.use('/kfc',adminRoute)
+
+let paymentRoute = require('./routes/paymentRoute')
+app.use("/kfc",paymentRoute)
