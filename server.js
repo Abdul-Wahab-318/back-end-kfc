@@ -1,4 +1,3 @@
-console.log("plis work")
 const express = require("express")
 let app = express()
 
@@ -22,7 +21,8 @@ app.use(cookieParser())
 //USE CORS
 let cors = require("cors")
 app.use(cors({
-    origin:['http://localhost:3001' , 'http://localhost:3000' , "https://kfc-awm.netlify.app"],
+    origin:['http://localhost:3001' , 'http://localhost:3000' 
+    , "https://kfc-awm.netlify.app" , "https://kfc-admin.netlify.app/"],
     credentials: true
 }))
 
