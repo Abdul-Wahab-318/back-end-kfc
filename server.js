@@ -22,7 +22,7 @@ app.use(cookieParser())
 let cors = require("cors")
 app.use(cors({
     origin:['http://localhost:3001' , 'http://localhost:3000' 
-    , "https://kfc-awm.netlify.app" , "https://kfc-admin.netlify.app/"],
+    , "https://kfc-awm.netlify.app" , "https://kfc-admin.netlify.app"],
     credentials: true
 }))
 
