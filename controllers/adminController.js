@@ -50,7 +50,15 @@ exports.loginAdmin = async (req,res)=>{
         req.admin = {...admin}
         admin.password = ""
         let token = admin.getJwtToken()
-        res.status(200).cookie('token',token,{httpOnly:true}).json({
+        res.status(200)
+        .cookie('token',token,
+        {
+            httpOnly:true ,
+            maxAge:3600000*5,
+            secure:true,
+            sameSite:'none',
+        })
+            .json({
             message: 'logged in',
             admin 
         })
