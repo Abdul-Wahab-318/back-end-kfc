@@ -40,9 +40,20 @@ exports.createUser = async (req,res)=>{
         })
     }
     catch(e){
-        res.status(400).json({
-            error: e.errors
-        })
+        if (e.code === 11000)
+        {
+            res.status(400).json({
+                error : "Email already exists" ,
+                emailExists : true 
+            })
+        }
+        else
+        {
+            res.status(400).json({
+                error: e.errors
+            })
+
+        }
     }
 }
 
