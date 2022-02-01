@@ -89,7 +89,14 @@ exports.loginUser =  async (req,res)=>{
             })
         }
         let token = user.getJwtToken()
-        res.status(200).cookie("token", token , {httpOnly:true}).json({
+        res.status(200).cookie("token", token , 
+            {
+                httpOnly:true ,
+                secure:true,
+                sameSite:'none',
+            }
+        )
+        .json({
             user
         })
     }catch(e){
